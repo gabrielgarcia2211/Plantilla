@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/estilos.css">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <div class="contenedor">
+        <h1>Tareas</h1>
+        <button class="btn-buscador" id="btn-buscador">Buscar</button>
+        <input type="search" class="buscador" name="buscador" id="buscador">
+      </div>
+    </nav>
+  </header>
+
+
+  <div class="main">
+
+    <section>
+      <div class="formu">
+        <form action="" class="formulario" id="formulario">
+          <input type="text" id="oculto">
+          <input type="text" name="titulo" id="titulo" class="titulo" placeholder="titulo">
+          <textarea name="descripcion" id="descripcion" class="descripcion" placeholder="descripcion"></textarea>
+          <button id="guardar" class="guardar" name="guardar" >Guardar</button>
+        </form>
+      </div>
+    </section>
+
+    <section>
+      <table class="egt">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Descripcion</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+          </tbody>
+      </table>
+    </section>
+  </div>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/app.js"></script>
+</body>
+
+</html>
