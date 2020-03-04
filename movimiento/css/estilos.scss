@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+}
+    .main{
+        max-width: 1000px;
+        width: 100%;
+        background: #7f807f;
+        margin:60px auto;
+        padding: 20px;
+
+        #p{
+            position: absolute;
+            background: #fff;
+        }
+
+        .contenedor{
+            width:80%;
+            background: #00cccc;
+            display: flex;
+            padding: 15px;
+            flex-flow: wrap row;
+            margin: 40px auto;
+            justify-content: center;
+            text-align: center;
+
+            .info{
+                width: 200px;
+                height: 200px;
+                background:#fff;
+                margin: 20px;
+                text-align: center;
+
+                #c1, #c2, #c3, #c4,#c5, #c6,#c7,#c8, #c9{
+                    position: relative;
+                    font-size: 18px;
+                    top:100px;
+                }
+                
+            }
+        }
+    }
+
+
+
+
+@keyframes colores{
+   0%{background:#ffae00;}
+   25%{background:#ff7300;}
+   50%{background:#ff3300;}
+   75%{background:#ff7300;}
+   100%{background:#ffae00;}
+}
+
+
+@keyframes animationFrames{
+    0% {transform:translate(0px,0px);}
+    15% {transform:translate(0px,-25px);}
+    30% {transform:translate(0px,0px);}
+    45% {transform:translate(0px,-15px);}
+    60% {transform:translate(0px,0px);}
+    75% {transform:translate(0px,-5px);}
+    100% {transform:translate(0px,0px);}
+  }
+   
+ 
+
+.color{
+    animation: colores 2s infinite;
+    
+}
+
+.color2{
+    animation: animationFrames 1s linear;
+}
+
+
