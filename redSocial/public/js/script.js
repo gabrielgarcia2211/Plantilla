@@ -8,14 +8,18 @@ $('.alert').hide();
            $('.alert').show();
         }else{
             $('.alert').hide();
-            /*var objDate={
-                usuario:usuarioIngre,
-                contrasenia:contraseniaIngre
-              };
-              $.post('../../persona.php', objDate, function(response){
-                        alert(response);
-              })
-              e.preventDefault();*/
+            $.ajax({
+                url : 'controller/persona.php',
+                data : { id : 123 },
+                type : 'GET',
+                success: function(respuesta) {
+                    alert("volvio");
+                   alert(respuesta);
+                },
+                error: function() {
+                    alert("No se ha podido obtener la información");
+                }
+            });
         }
         e.preventDefault();
        

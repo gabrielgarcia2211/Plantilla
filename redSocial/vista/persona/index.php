@@ -19,7 +19,7 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <link rel="shortcut icon" href="https://img.icons8.com/color/48/000000/fenix.png" />
-    <link rel="stylesheet" href="<?php echo constant('URL')?>public/css/estilo.css">
+    <link rel="stylesheet" href="<?php echo constant('URL')?>public/css/estilos.css">
 </head>
 
 <body>
@@ -34,7 +34,7 @@
             <br>
             <br>
             <div class="container" id="formulario">
-                <form class="contact_form" action="<?php echo constant('URL');?>persona/validarPersona" method="POST" id="contact_form" runat="server">
+                <form class="contact_form" action="" method="" id="contact_form" runat="server">
                     <div class="row">
                         <div style="margin: auto;">
                             <label>¿No Tienes Cuenta?</label>
@@ -69,9 +69,9 @@
                     <div class="col-xs-12 col-sm-4">
                         <input id="verificarDatos" type="submit" class="btn btn-dark" value="Entrar">
                     </div>
-                        <div class="alert alert-danger" role="alert">
-                        This is a danger alert—check it out!
-                        </div>
+                    <div class="alert alert-danger" role="alert">
+                        <p class="respuesta" >aaaaa</p>
+                    </div>
                 
                 </form>
                     <div class="abajo" style="text-align: center; width: 100%;">
@@ -87,8 +87,8 @@
             </div>
         </div>
     </div>
-   <!-- <script src="<?php echo constant('URL')?>public/js/jquery.min.js"></script>
-    <script src="<?php echo constant('URL')?>public/js/script.js"></script>-->
+   
+    <script src="<?php echo constant('URL')?>public/js/main.js"></script>
 </body>
 
 </html>

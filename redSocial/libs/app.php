@@ -1,43 +1,36 @@
 <?php
-require_once 'controller/error.php';
-class App{
-        function __construct(){
 
-           // echo "<p>Nueva APP</p>";
 
-            /*En esta parte se toman los dos valores que envie la url
-            /la primera es para saber a que controlador vamos a llamr y la segunda es que metodo vamos a innvocar*/
+ class App{
 
-            $url = isset($_GET['url']) ? $_GET['url'] : null;
-            $url = rtrim($url, '/');
+    function __construct(){
+        $url = isset($_GET['url']) ? $_GET['url'] : null;
+        $url = rtrim($url, '/');
+        //dividimos los parametros
+        $url = explode('/', $url);
 
-            //dividimos los parametros
+        if(empty($url[0])){
+            $url[0]='persona';
+            $archivoController = 'controlador/personaControl.php';
+            require_once $archivoController;
+            $controller = new  personaControl();
+            $controller->loadModel($url[0]);
+            $controller->render();
 
-            $url = explode('/', $url);
-            //cuando se ingresa sin definir controlador
-            if(empty($url[0])){
-                $archivoController = 'controller/main.php';
-                require_once $archivoController;
-                $controller = new  Main();
-                $controller->loadModel($url[0]);
-                $controller->render();
-                return;
-            }
+            return;
+        }else if(!empty($url[0])){
 
-            ///noooooooooooooo
-
-            $archivoController = 'controller/'. $url[0] .'.php';
-                
+            $archivoController = 'controlador/'. $url[0] .'.php';
+              
             if(file_exists($archivoController)){
                 require_once $archivoController;
 
                 //inicializa el controlador ycargamos el modelo
                 $controller = new $url[0];
+                $url[0] = rtrim($url[0], 'Control');
                 $controller->loadModel($url[0]);
-                
-                
 
-              //numero de elentos del arreglo
+                //numero de elentos del arreglo
                 $nparam = sizeof($url);
 
                 if($nparam>1){
@@ -55,13 +48,13 @@ class App{
                 else{
                     $controller->render();
                 }
-                
 
-            }else{
-               
-                $controller = new controlError();
             }
+
         }
-}
+        
+    }
+    
+ }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-define('URL', 'http://localhost/Red-Social-master/');
+define('URL', 'http://localhost/redSocial/');
 
 define('HOST', 'localhost');
 define('DB', 'redsocial');

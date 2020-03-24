@@ -31,6 +31,7 @@ class personaDao extends Model{
     public function getById($usuario){
      
       $item = [];
+      $person = null;
         try{
             $query = $this->db->connect()->prepare('SELECT * FROM PERSONA WHERE usuario = :usuario');
             $query->execute(['usuario' => $usuario]);    
@@ -42,7 +43,8 @@ class personaDao extends Model{
                     "contrasenia" => $row['contrasenia']
                 ];
             }
-            $person = new personaDto($item['usuario'], $item['nombre'], $item['correo'], $item['contrasenia']);
+            if(!empty($item)){
+            $person = new personaDto($item["usuario"], $item['nombre'], $item['correo'], $item['contrasenia']);}
             //echo var_dump($person);
             return $person;
         }catch(PDOException $e){
