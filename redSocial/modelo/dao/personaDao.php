@@ -16,10 +16,10 @@ class personaDao extends Model{
         $query = $this->db->connect()->prepare('INSERT INTO PERSONA (usuario, nombre, correo, contrasenia) VALUES (:usuario, :nombre, :correo, :contrasenia)');
         try{
             $query->execute([
-                'usuario' => $person['usuario'],
-                'nombre' => $person['nombre'],
-                'correo' => $person['correo'],
-                'contrasenia' => $person['contrasenia']
+                'usuario' => $person->getUsuario(),
+                'nombre' => $person->getNombre(),
+                'correo' => $person->getCorreo(),
+                'contrasenia' => $person->getContrasenia()
             ]);
             return true;
         }catch(PDOException $e){
@@ -29,7 +29,6 @@ class personaDao extends Model{
     }
 
     public function getById($usuario){
-     
       $item = [];
       $person = null;
         try{
@@ -49,6 +48,20 @@ class personaDao extends Model{
             return $person;
         }catch(PDOException $e){
             return null;
+        }
+    }
+
+    
+    public function update($item){
+       $query = $this->db->connect()->prepare('UPDATE PERSONA SET contrasenia = :contrasenia WHERE usuario = :usuario');
+        try{
+            $query->execute([
+                'usuario' => $item['usuario'],
+                'contrasenia' => $item['contrasenia']
+            ]);
+            return true;
+        }catch(PDOException $e){
+            return false;
         }
     }
 }
