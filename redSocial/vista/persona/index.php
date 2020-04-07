@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-8">
                         <a href="<?php echo constant('URL')?>personaControl/render/recuperarC" style="color: black;">Olvido su contraseña?</a>
-                        <a href="#" style="color: black;">Olvido su nombre de usuario?</a>
+                        <a href="<?php echo constant('URL')?>personaControl/render/recuperarU" style="color: black;">Olvido su nombre de usuario?</a>
                     </div>
                     <div class="col-xs-12 col-sm-4">
                         <input id="verificarDatos" type="submit" class="btn btn-dark" value="Entrar">

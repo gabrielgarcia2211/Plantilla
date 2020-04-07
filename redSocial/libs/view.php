@@ -3,8 +3,10 @@
 
         class View{
 
+           
+
             function __construct(){
-                
+                $this->pagina_actual="";
             }
 
             function render($const ,$nombre){

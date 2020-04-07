@@ -216,9 +216,10 @@ textarea {
     }
 }
 
-.registrar, .actualizarRc{
+.registrar, .actualizarRc, .actualizarRu{
     margin-top: 10px;
     margin-bottom: 100px;
+   
 }
 
 .regresarT{
@@ -320,4 +321,27 @@ textarea {
     #ima{
         width: 350px;
     }
+}
+.card-deck{
+    margin: 40px;
+    
+}
+
+.card{
+    padding: 10px;
+}
+
+.card:hover{
+    
+    transition: all .3s ease;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+    
+    
+
+#myImg:hover{
+    cursor: pointer;
+   
 }

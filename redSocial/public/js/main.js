@@ -19,9 +19,12 @@ $(document).ready(function(){
                 $('#textUsuario, #textContrasenia').css({'border': "2px solid  rgba(250, 19, 19, 0.671)"});
                 httpRequest(URLD + "personaControl/validarUsuario/" + usuarioIngre + "/" + contraseniaIngre, function(){
                     var aux = this.responseText;
-                    if(aux){
-                    llamdaEntrada("index");
+                    if(aux == ""){
+                        $('.respuesta').text("Datos incorrectos!");
+                        $('.alert').show();
+                        return;
                     }
+                    llamdaEntrada("index");  llamdaEntrada("perfilControl", "index");
             
             });
                 
@@ -43,10 +46,15 @@ $(document).ready(function(){
             $('.alert').hide();
             httpRequest(URLD + "personaControl/guardarUsuario/" + nUsuario + "/" + nNombre + "/" + nEmail + "/" + nContraseña , function(){
              
-              console.log(this.responseText);
-                  
+              var rest = this.responseText;
+              if(rest == "true"){
+                llamdaEntrada("perfilControl", "index");
+              }else{
+                $('.respuesta').text(rest);
+                $('.alert').show();
+              }
+     
             });
-            console.log("hola");
         e.preventDefault();
            
         });
@@ -65,21 +73,57 @@ $(document).ready(function(){
             }
             $('.alert').hide();
             httpRequest(URLD + "personaControl/cambiarContraseña/" + recuUsuario + "/" + recuEmail + "/" + recuNueva  , function(){
-             
-                $('.respuesta').text(this.responseText);
+              var rest = this.responseText;
+              if(rest == "true"){
+                $('.respuesta').text("Contraseña actualizada!");
                 $('.alert').show();
-                  
+                window.location.href = URLD + "personaControl";
+
+              }else{
+                $('.respuesta').text(rest);
+                $('.alert').show();
+              }
             });
-            console.log("hola");
         e.preventDefault();
            
         });
+
+        //METODO PARA LA ACTUALIZAR USUARIO RECUPERARC/INDEX
+        $("#actualizarRu").click(function(e){
+          $('.alert').show();
+          var receEmail=$('#receEmail').val();
+          var receContraseña=$('#receContraseña').val();
+          var receUsuario=$('#receUsuario').val();
+          if(!receEmail || !receContraseña || !receUsuario){
+              $('.respuesta').text("Por favor llene todos los campos");
+              $('.alert').show();
+              return;
+          }
+          $('.alert').hide();
+          httpRequest(URLD + "personaControl/cambiarUsuario/" + receEmail + "/" + receContraseña + "/" + receUsuario  , function(){
+            rest = this.responseText;
+            if(rest == "1"){
+              console.log(rest);
+              $('.respuesta').text("Usuario actualizado!");
+              $('.alert').show();
+              window.location.href = URLD + "personaControl";
+
+            }else{
+              console.log(rest);
+              $('.respuesta').text("Nombre de usuario ya registrado!");
+              $('.alert').show();
+            }
+            
+          });
+      e.preventDefault();
+         
+      });
     
 });
 
-function llamdaEntrada(guia){
+function llamdaEntrada(control, guia){
    //console.log(URLD + "personaControl/render/" + guia);
-    window.location.href = URLD + "perfilControl/render/" + guia;
+    window.location.href = URLD + control +"/render/" + guia;
 }
 
 function httpRequest(url, callback){

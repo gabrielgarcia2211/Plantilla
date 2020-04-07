@@ -28,33 +28,41 @@ class personaDao extends Model{
         
     }
 
-    public function getById($usuario){
-      $item = [];
-      $person = null;
+    public function getValidar($usuario, $password){
         try{
-            $query = $this->db->connect()->prepare('SELECT * FROM PERSONA WHERE usuario = :usuario');
-            $query->execute(['usuario' => $usuario]);    
-            while($row = $query->fetch()){
-                $item = [
-                    "usuario" => $row['usuario'],
-                    "nombre" =>  $row['nombre'],
-                    "correo" =>  $row['correo'],
-                    "contrasenia" => $row['contrasenia']
-                ];
-            }
-            if(!empty($item)){
-            $person = new personaDto($item["usuario"], $item['nombre'], $item['correo'], $item['contrasenia']);}
-            //echo var_dump($person);
-            return $person;
+            $statement = $this->db->connect()->prepare("SELECT * FROM persona WHERE (usuario = :usuario OR correo = :correo) AND contrasenia = :contrasenia ");
+            $statement->execute(array(
+                ':usuario' =>  $usuario,
+                ':correo' => $usuario,
+                ':contrasenia' => $password 
+            ));
+            $resultado = $statement->fetch();
+            return  $resultado;
+        }catch(PDOException $e){
+            return null;
+        }
+    }
+
+    public function getExiste($usuario, $correo){
+        try{
+            $statement = $this->db->connect()->prepare("SELECT * FROM persona WHERE (usuario = :usuario OR correo = :correo)");
+            $statement->execute(array(
+                ':usuario' =>  $usuario,
+                ':correo' => $correo
+            ));
+            $resultado = $statement->fetch();
+            if(!empty($resultado)){
+                $resultado = new personaDto($resultado['usuario'], $resultado['nombre'], $resultado['correo'], $resultado['contrasenia']);}
+            return  $resultado;
         }catch(PDOException $e){
             return null;
         }
     }
 
     
-    public function update($item){
-       $query = $this->db->connect()->prepare('UPDATE PERSONA SET contrasenia = :contrasenia WHERE usuario = :usuario');
+    public function updateCon($item){
         try{
+            $query = $this->db->connect()->prepare('UPDATE PERSONA SET contrasenia = :contrasenia WHERE usuario = :usuario');
             $query->execute([
                 'usuario' => $item['usuario'],
                 'contrasenia' => $item['contrasenia']
@@ -64,6 +72,26 @@ class personaDao extends Model{
             return false;
         }
     }
+
+    public function updateUser($item){    
+         try{
+            $query = $this->db->connect()->prepare('UPDATE persona SET usuario = :usuario WHERE correo = :correo
+            AND NOT EXISTS (SELECT usuario FROM persona WHERE usuario = :usuario2 )');
+             $query->execute([
+                 ':usuario' => $item['usuario'],
+                 ':correo' => $item['correo'],
+                 ':usuario2' => $item['usuario'],
+             ]);
+             $aux =  $query->rowCount(); 
+             return substr($aux,0,1);
+         }catch(PDOException $e){
+             return false;
+         }
+    }
+
+    
+
+
 }
 
 ?>

@@ -22,16 +22,11 @@
           if($param == null)return;
           $idUsuario =  $param[0];
           $idContraseña =  $param[1];
-          $person = $this->model->getById($idUsuario);
-          if(!$person){
-            echo "Usuario no registrado";
-          }else{
-            if($person->getUsuario() ==  $idUsuario && $person->getContrasenia() == $idContraseña ){
-              $_SESSION['user'] = $person->getUsuario();
-              echo true;
-            }
-            else{
-            echo "Datos incorrectos";}
+          $resul = $this->model->getValidar($idUsuario,  $idContraseña);
+          if(!empty($resul)){
+            $_SESSION['user'] = $resul[0];
+            echo true;
+            return;
           }
         }
 
@@ -42,15 +37,23 @@
           $email = $param[2];
           $contraseña = $param[3];
 
-          $mensaje = "";
 
-          if($this->model->insert(['usuario' =>  $usuario, 'nombre' => $nombre, 'correo' =>  $email, 'contrasenia' => $contraseña ])){
-              $mensaje = "Registro exitoso!";
-          }else{
-              $mensaje = "Usuario ya registrado";
+          $result = $this->model->getExiste($usuario,$email);
+          if(empty($result)){
+            $this->model->insert(['usuario' =>  $usuario, 'nombre' => $nombre, 'correo' =>  $email, 'contrasenia' => $contraseña ]);
+           
+            $_SESSION['user'] =$resul[0];
+
+            echo "true";
+            return;
           }
-          echo $mensaje;
-
+          
+          if($result->getUsuario() == $usuario){
+            echo "Usuario ya existe";
+          }else{
+            echo "Correo ya existe";
+          }
+          
         }
 
         function cambiarContraseña($param = null){
@@ -59,19 +62,39 @@
           $correo =  $param[1];
           $contraseña  =  $param[2];
 
-          $person = $this->model->getById($usuario);
+          $person = $this->model->getExiste($usuario,$correo);
           if(!$person){
             echo "Usuario no registrado";
-          }else if($person->getCorreo() !=  $correo ){
+            return;
+          }else if($person->getUsuario() !=  $usuario || $person->getCorreo() !=  $correo){
             echo "Datos incorrectos";
             return;
           }
           
-          $this->model->update(['usuario' =>  $usuario, 'contrasenia' => $contraseña ]);
-          echo "Contraseña actualizada";
-
+          $this->model->updateCon(['usuario' =>  $usuario, 'contrasenia' => $contraseña ]);
+          echo "true";
 
         }
-   }
 
+        function cambiarUsuario($param = null){
+          if($param == null)return;
+          $correo =  $param[0];
+          $contraseña =  $param[1];
+          $usuario  =  $param[2];
+
+          $person = $this->model->getExiste("",$correo);
+          if(!$person){
+            echo "Usuario no registrado";
+            return;
+          }else if($person->getCorreo() !=  $correo || $person->getContrasenia() !=  $contraseña){
+            echo "Datos incorrectos";
+            return;
+          }
+          
+          $res =  $this->model->updateUser(['usuario' =>  $usuario, 'correo' => $correo ]);
+          echo $res;
+
+        }
+
+      }
 ?>

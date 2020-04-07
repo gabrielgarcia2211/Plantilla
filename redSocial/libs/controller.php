@@ -15,6 +15,8 @@ class Controller{
 
             $modelName = $model.'Dao';
             $this->model = new $modelName();
+        }else{
+            echo $model;
         }
     }
 }

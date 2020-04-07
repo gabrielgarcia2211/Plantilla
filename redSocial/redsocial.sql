@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `foto` (
-  `id` int(12) NOT NULL,
+  `id` int(12) NOT NULL autoincrement ,
   `nombre` varchar(100) DEFAULT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   `url` varchar(200) NOT NULL

@@ -11,18 +11,24 @@
         $url = rtrim( $url, '/');
         //dividimos los parametros
         $url = explode('/',  $url);
+
+        if($dir==null){
+            header('Location: http://localhost/redSocial/personaControl');
+        }
+
+
         if(empty($url[0])){
             $this->defecto();
         }else if(!empty($url[0])){      
-            $aux = "perfilControl/render/index"; 
-            if(strcmp($dir, $aux) === 0 && !isset($_SESSION['user'])){
+            $aux = "perfilControl/render/index";
+            if((strcmp($dir, $aux)  === 0) && !isset($_SESSION['user'])){
                 header('Location: http://localhost/redSocial/personaControl');
                 return;
-            }else if(isset($_SESSION['user']) && $url[0]=="personaControl"){
+            }else if(isset($_SESSION['user']) && ($url[0]=="personaControl")){
                 header('Location: http://localhost/redSocial/perfilControl/render/index');
                 return;
             }
-           // unset($_SESSION['user']);
+           //unset($_SESSION['user']);
             $this->busqueda($url);
         }
         
@@ -37,19 +43,21 @@
             $controller = new  personaControl();
             $controller->loadModel($url[0]);
             $controller->render(null);
+            header('Location: http://localhost/redSocial/personaControl');
             return;
     }
 
     function busqueda($url){
         $archivoController = 'controlador/'. $url[0] .'.php';
-                
+            
         if(file_exists($archivoController)){
             require_once $archivoController;
     
-            //inicializa el controlador ycargamos el modelo
+            //inicializa el controlador y cargamos el modelo
             $controller = new $url[0];
-            $url[0] = rtrim($url[0], 'Control');
+            $url[0] = trim($url[0], 'Control');
             $controller->loadModel($url[0]);
+        
     
             //numero de elentos del arreglo
             $nparam = sizeof($url);

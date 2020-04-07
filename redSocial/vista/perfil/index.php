@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,16 +22,20 @@
     <link rel="shortcut icon" href="https://img.icons8.com/color/48/000000/fenix.png" />
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo constant('URL')?>public/css/estilos.css">
+    <link href="<?php echo constant('URL')?>public/font/css/all.min.css" rel="stylesheet">
 
 </head>
 
 
 <body>
+<body>
+    <?php $i=0?>
+    
     <nav class="navbar navbar-light">
-        <div> 
-        <a class="navbar-brand" href="#">
+        <div>
+            <a class="navbar-brand" href="principal.html">
                 <img src="https://img.icons8.com/color/45/000000/fenix.png" class="d-inline-block align-top" alt="">
-                <p style = "display:inline; color:white;"><?php echo "Bienvenido, " . strtoupper($_SESSION['user']); ?></p>
+                <p style="display:inline-block; color:white"><?php echo $_SESSION['user'] ?></p>
             </a>
         </div>
         <div>
@@ -44,109 +49,119 @@
     </nav>
 
     <div class="container">
-    <div class="row">
-        <div class="container col-lg-6 col-sm-12 padding-info" style="align-items: center;">
-            <div style="padding-left: 35%;">
-                <img class="image-perfil"
-                    src="https://scontent.fbga2-1.fna.fbcdn.net/v/t1.0-9/18118684_1242522959180103_3359169384725308706_n.jpg?_nc_cat=105&_nc_sid=85a577&_nc_oc=AQm1XtsqswOh4wu7OgT_BUA-t81QkbQ0_xiCGsQFw2avTPa6A1OJpsiucDy76hvN9jg&_nc_ht=scontent.fbga2-1.fna&oh=935169b5f771429b65cc1c4efbc74a1f&oe=5EA1F171"
+        <div class="row">
+            <div class="container col-lg-6 col-sm-12 padding-info" style="align-items: center;">
+                <div style="padding-left: 35%;">
+                <?php if(isset($this->perfil['userPersona'])):?>
+                    <img id="mi_imagen" class="image-perfil"
+                    src="<?php echo constant('URL'). "fotos/" . $this->perfil['userPersona'] . "/" . $this->perfil['url']   ?>"
                     alt="">
+                <?php endif?>
+
+                <?php if(!isset($this->perfil['userPersona'])):?>
+                    <img id="mi_imagen" class="image-perfil"
+                    src="<?php echo constant('URL'). "fotos/user.png"?>"
+                    alt="">
+                <?php endif?>
+                        
+                </div>
+                <div style="display: flex;">
+
+                    <h6>
+                       Seguidores:
+                    </h6>
+                    <h6 id="followers">
+                        1223
+                    </h6>
+                    <a href="seguidores.html"> <img src="<?php echo constant('URL')?>public/icon/info.svg" alt=""></a>
+
+                </div>
+                <div style="display: flex;">
+
+                    <h6>
+                        Siguiendo:
+                    </h6>
+                    <h6 id="following">
+                        1523
+                    </h6>
+
+                   <a href="siguiendo.html"> <img src="<?php echo constant('URL')?>public/icon/info.svg" alt=""></a>
+
+                </div>
             </div>
-        </div>
-        <div class="padding-info container col-lg-6 col-sm-12">
-            
-                <h3>Angela Acevedo</h3>
-                <h6>@elniñodanilin</h6>
-                <h6>CUCUTA - COLOMBIA</h6>
-                <h6>GUARACHERA</h6>
-                <h6>angelita@gmail.com</h6>
-            
-        </div>
+            <div class="padding-info container col-lg-6 col-sm-12">
 
-        <div class="container col-lg-6 col-sm-12 padding-info " style="padding-left: 26%;">
-            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <button type="button" class="btn btn-success">Seguir</button>
-                <button type="button" class="btn btn-danger">Bloquear</button>
+                <h6><?php echo $this->datos['nombre']?></h6> 
+                <h6><?php echo $this->datos['correo']?></h6> 
+                <h6><?php echo $this->datos['usuario']?></h6> 
+                <h6>CUCUTA - COLOMBIA</h6> 
 
-                <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Más opciones
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="#">Enviar mensaje</a>
-                        <a class="dropdown-item" href="#">Dar un toque</a>
+            </div>
+            <div class="container col-lg-6 col-sm-12 padding-info " style="padding-left: 26%;">
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-success"><a style="text-decoration: none; color:white;"href="<?php echo constant('URL')?>perfilControl/render/subir">Foto</a></button>
+                    <button type="button" class="btn btn-success"><a style="text-decoration: none; color:white;"href="<?php echo constant('URL')?>perfilControl/llamadaImagenes/1">Seguir</a></button>
+                    <button type="button" class="btn btn-danger">Bloquear</button>
+
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Más opciones
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="#">Enviar mensaje</a>
+                            <a class="dropdown-item" href="#">Dar un toque</a>
+                        </div>
                     </div>
                 </div>
+
             </div>
-            
-        </div>
         </div>
     </div>
-    <div class="container">
-
-        <div class="card-group">
-
-            <div class="card objetfit">
-                <img class="card-img-top"
-                    src="https://scontent.fbga2-1.fna.fbcdn.net/v/t1.0-9/38139435_2035412486510929_2011373939661471744_n.jpg?_nc_cat=111&_nc_sid=13bebb&_nc_oc=AQkn6c-FOnohiiEWjjV5zMUOgAvbfZ4m_UMf7InvVb1aaIa-4Fjcl33CIRElZWWL-QQ&_nc_ht=scontent.fbga2-1.fna&oh=e7f90d86eace3c267186fc80dfbbde56&oe=5E9E7853"
-                    alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
+        <div class="container">
+        <?php for ($m=0; $m < count($this->fotos)/3 ; $m++):?>
+            <div class="card-deck">
+                <?php for ($j=$i; $j < count($this->fotos); $j++):?>
+                <?php $i++?>
+                    <div class="card objetfit">
+                        <img id="myImg" 
+                            src="<?php echo constant('URL') . "fotos/" . $_SESSION['user'] . "/" . $this->fotos[$j]['url']?>"
+                            alt="Snow" onclick="tomaPerfil(<?php echo $this->fotos[$j]['id']?>)">
+                        <div id="myModal" class="modal">
+                            <span class="close">&times;</span>
+                            <img class="modal-content" id="img01">
+                            <div id="caption"></div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><small class="text-muted"><?php echo $this->fotos[$j]['nombre']?></small></p>
+                        </div>
+                    </div> 
+                <?php if(($i % 3)==0){
+                    break;
+                }?>
+                <?php endfor; ?>
             </div>
+            <?php endfor; ?>
+        </div>  
 
-            <div class="card objetfit">
-                <img class="card-img-top"
-                    src="https://scontent.fbga2-1.fna.fbcdn.net/v/t1.0-9/38139435_2035412486510929_2011373939661471744_n.jpg?_nc_cat=111&_nc_sid=13bebb&_nc_oc=AQkn6c-FOnohiiEWjjV5zMUOgAvbfZ4m_UMf7InvVb1aaIa-4Fjcl33CIRElZWWL-QQ&_nc_ht=scontent.fbga2-1.fna&oh=e7f90d86eace3c267186fc80dfbbde56&oe=5E9E7853"
-                    alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-            <div class="card objetfit">
-                <img class="card-img-top"
-                    src="https://scontent.fbga2-1.fna.fbcdn.net/v/t1.0-9/38139435_2035412486510929_2011373939661471744_n.jpg?_nc_cat=111&_nc_sid=13bebb&_nc_oc=AQkn6c-FOnohiiEWjjV5zMUOgAvbfZ4m_UMf7InvVb1aaIa-4Fjcl33CIRElZWWL-QQ&_nc_ht=scontent.fbga2-1.fna&oh=e7f90d86eace3c267186fc80dfbbde56&oe=5E9E7853"
-                    alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-        </div>
+        <div class="paginacion">
+        <?php $cont= (int)$this->pagina_actual ?>
+                    
+					
+						<?php if ($this->pagina_actual != 1): ?>
+							<a href="<?php echo constant('URL'). "perfilControl/render/index/" . $cont=$cont-1 ; ?>" class="izquierda"><i class="fa fa-arrow-left"></i> Pagina Anterior</a>
+						<?php endif ?>
 
-        <div class="card-group">
-            <div class="card objetfit">
-                <img class="card-img-top"
-                    src="https://scontent.fbga2-1.fna.fbcdn.net/v/t1.0-9/38139435_2035412486510929_2011373939661471744_n.jpg?_nc_cat=111&_nc_sid=13bebb&_nc_oc=AQkn6c-FOnohiiEWjjV5zMUOgAvbfZ4m_UMf7InvVb1aaIa-4Fjcl33CIRElZWWL-QQ&_nc_ht=scontent.fbga2-1.fna&oh=e7f90d86eace3c267186fc80dfbbde56&oe=5E9E7853"
-                    alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-            <div class="card objetfit">
-                <img class="card-img-top"
-                    src="https://scontent.fbga2-1.fna.fbcdn.net/v/t1.0-9/38139435_2035412486510929_2011373939661471744_n.jpg?_nc_cat=111&_nc_sid=13bebb&_nc_oc=AQkn6c-FOnohiiEWjjV5zMUOgAvbfZ4m_UMf7InvVb1aaIa-4Fjcl33CIRElZWWL-QQ&_nc_ht=scontent.fbga2-1.fna&oh=e7f90d86eace3c267186fc80dfbbde56&oe=5E9E7853"
-                    alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-            <div class="card objetfit">
-                <img class="card-img-top"
-                    src="https://scontent.fbga2-1.fna.fbcdn.net/v/t1.0-9/38139435_2035412486510929_2011373939661471744_n.jpg?_nc_cat=111&_nc_sid=13bebb&_nc_oc=AQkn6c-FOnohiiEWjjV5zMUOgAvbfZ4m_UMf7InvVb1aaIa-4Fjcl33CIRElZWWL-QQ&_nc_ht=scontent.fbga2-1.fna&oh=e7f90d86eace3c267186fc80dfbbde56&oe=5E9E7853"
-                    alt="Card image cap">
-                <div class="card-body">
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
+					
+						<?php if (($this->totalpaginas != $this->pagina_actual) && $this->totalpaginas>0 ): ?>
+                            <a href="<?php echo constant('URL'). "perfilControl/render/index/" . (int)$this->pagina_actual=$this->pagina_actual+1 ; ?>" class="derecha">Pagina Siguiente <i class="fa fa-arrow-right"></i></a>
+						<?php endif ?> 
+		</div>
 
     <div class="card-footer text-muted">
         <p style="color: #FFFFFF;"> Mi red social - Todos los derechos reservados® 2020</p>
     </div>
-
 </body>
-
+<script src="<?php echo constant('URL')?>public/js/perfil.js"></script>
 </html>
+
