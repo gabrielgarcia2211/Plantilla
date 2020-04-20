@@ -9,6 +9,7 @@
           parent::__construct();
           $this->view->fotos = [];
           $this->view->datos = [];
+          $this->view->persona = [];
           $this->view->perfil = "";
           $this->view->totalpost ="";
           $this->view->totalpaginas="";
@@ -22,6 +23,7 @@
           $constr = "perfil";
           $this->traerUser();
           $this->getFotoperfil();
+          $this->traerUsuarios();
           $valor = (isset($ubicacion[1])) ? $ubicacion[1] : 1;
           $this->llamadaImagenes($valor);
           $this->view->render($constr, $ubicacion[0]);
@@ -104,9 +106,27 @@
         $this->view->datos = $this->model->getUser(['usuario' =>  $_SESSION['user']]);
       
       }
+
+
+
       function getFotoperfil(){
-      $this->view->perfil =  $this->model->getPerfil( $_SESSION['user']);
-    }
+
+        $this->view->perfil =  $this->model->getPerfil( $_SESSION['user']);
+      }
+
+
+      function traerUsuarios(){
+        $this->view->persona = $this->model->getUsuarios( $_SESSION['user']);
+      }
+
+      
+
+      function getSeguidor($user){
+        $aux = $this->model->obtenerUsuario($user[0]); 
+        echo $aux[0]["usuario"];
+        $this->view->datos =   $this->model->getUser(['usuario' =>  $aux[0]["usuario"]]);
+        //$this->view->render("perfil", "verPersona");
+      }
 
    
  

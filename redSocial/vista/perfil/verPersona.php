@@ -92,75 +92,12 @@
             <div class="padding-info container col-lg-6 col-sm-12">
 
                 <h6><?php echo $this->datos['nombre']?></h6> 
-                <h6><?php echo $this->datos['correo']?></h6> 
-                <h6><?php echo $this->datos['usuario']?></h6> 
                 <h6>CUCUTA - COLOMBIA</h6> 
 
             </div>
-            <div class="container col-lg-6 col-sm-12 padding-info " style="padding-left: 26%;">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <button type="button" class="btn btn-success"><a style="text-decoration: none; color:white;"href="<?php echo constant('URL')?>perfilControl/render/subir">Foto</a></button>
-                    
-
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Más opciones
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <a class="dropdown-item" href="#">Enviar mensaje</a>
-                            <a class="dropdown-item" href="#">Dar un toque</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-        <div class="container">
-        <?php for ($m=0; $m < count($this->fotos)/3 ; $m++):?>
-            <div class="card-deck">
-                <?php for ($j=$i; $j < count($this->fotos); $j++):?>
-                <?php $i++?>
-                    <div class="card objetfit">
-                        <img id="myImg" 
-                            src="<?php echo constant('URL') . "fotos/" . $_SESSION['user'] . "/" . $this->fotos[$j]['url']?>"
-                            alt="Snow" onclick="tomaPerfil(<?php echo $this->fotos[$j]['id']?>)">
-                        <div id="myModal" class="modal">
-                            <span class="close">&times;</span>
-                            <img class="modal-content" id="img01">
-                            <div id="caption"></div>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text"><small class="text-muted"><?php echo $this->fotos[$j]['nombre']?></small></p>
-                        </div>
-                    </div> 
-                <?php if(($i % 3)==0){
-                    break;
-                }?>
-                <?php endfor; ?>
-            </div>
-            <?php endfor; ?>
-        </div>  
-
-        <div class="paginacion">
-        <?php $cont= (int)$this->pagina_actual ?>
-                    
-					
-						<?php if ($this->pagina_actual != 1): ?>
-							<a href="<?php echo constant('URL'). "perfilControl/render/index/" . $cont=$cont-1 ; ?>" class="izquierda btn btn-primary btn-lg active"><i class="fa fa-arrow-left"></i> Pagina Anterior</a>
-						<?php endif ?>
-
-					
-						<?php if (($this->totalpaginas != $this->pagina_actual) && $this->totalpaginas>0 ): ?>
-                            <a href="<?php echo constant('URL'). "perfilControl/render/index/" . (int)$this->pagina_actual=$this->pagina_actual+1 ; ?>" class="derecha btn btn-primary btn-lg active">Pagina Siguiente <i class="fa fa-arrow-right"></i></a>
-						<?php endif ?> 
-		</div>
-    <br>
     <div class="card-footer text-muted">
         <p style="color: #FFFFFF;"> Mi red social - Todos los derechos reservados® 2020</p>
     </div>
 </body>
 <script src="<?php echo constant('URL')?>public/js/perfil.js"></script>
 </html>
-

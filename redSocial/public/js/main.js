@@ -101,12 +101,12 @@ $(document).ready(function(){
           }
           $('.alert').hide();
           httpRequest(URLD + "personaControl/cambiarUsuario/" + receEmail + "/" + receContraseña + "/" + receUsuario  , function(){
-            rest = this.responseText;
+           rest = this.responseText;
             if(rest == "1"){
-              console.log(rest);
-              $('.respuesta').text("Usuario actualizado!");
-              $('.alert').show();
-              window.location.href = URLD + "personaControl";
+             console.log(rest);
+             $('.respuesta').text("Usuario actualizado!");
+             $('.alert').show();
+             llamdaEntrada("personaControl", "index");
 
             }else{
               console.log(rest);

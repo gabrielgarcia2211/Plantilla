@@ -42,7 +42,7 @@
           if(empty($result)){
             $this->model->insert(['usuario' =>  $usuario, 'nombre' => $nombre, 'correo' =>  $email, 'contrasenia' => $contraseña ]);
            
-            $_SESSION['user'] =$resul[0];
+            $_SESSION['user'] =$result[0];
 
             echo "true";
             return;
@@ -92,7 +92,11 @@
           }
           
           $res =  $this->model->updateUser(['usuario' =>  $usuario, 'correo' => $correo ]);
+          if($res==1){
+            rename ("fotos/" . $person->getUsuario() ,  "fotos/" . $usuario );
+          }
           echo $res;
+
 
         }
 

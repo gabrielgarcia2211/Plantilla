@@ -227,3 +227,9 @@ footer .copyright {
 	border:1px solid rgba(255,255,255,1);
 }
 
+#hola{
+    background: linear-gradient(150deg, #CD6155, #AF7AC5, #1ABC9C);
+    background-size: 400% 300%;
+    animation: bgGradiente 5s ease infinite;
+}
+

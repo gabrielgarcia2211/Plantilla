@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <div id="formato" class="row">
+    <div id="formato" class="row" style="height: 740px;">
         <div class="col-xs-6 col-sm-6" style="text-align: center;" id="imagen">
             <div>
                 <h3 style="margin-top: 120px; color: #F39C12;">MI RED SOCIAL</h3>

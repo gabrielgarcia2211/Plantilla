@@ -1,7 +1,8 @@
 const URLD="http://localhost/redSocial/";
 var id="";
 $(document).ready(function(){      
-        
+    $('.alert').hide();
+
         $("#formulario").submit(function (e) {
             e.preventDefault();
             var foto=$('#foto').val();
@@ -13,7 +14,8 @@ $(document).ready(function(){
                 return;
             }
             if(!verificarVacio([foto, titulo, texto])){
-                console.log("vacio");
+                $('.respuesta').text("Por favor llene todos los campos");
+                $('.alert').show();
                 return;
             }
             url="http://localhost/redSocial/perfilControl/subirFichero";
@@ -43,7 +45,32 @@ $(document).ready(function(){
                 }
             });
         });   
+
+        $(".verPerson").click(function(e) {
+            e.preventDefault();
+            var valor="";
+            valor=$(this).parents("tr").find("td").eq(2).html();
+            $.ajax({
+                type: "POST",
+                url: "" ,
+                data: "",
+                success: function (data) {
+                   console.log(data);
+                   
+                },
+                error: function (r) {
+                    alert("Error del servidor");
+                }
+            });
+            
+        });
+           
+            
+
 });
+
+
+
 
 function tomaPerfil(res){
     
@@ -90,6 +117,18 @@ function fileValidation(param){
                 document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'"/>';
             };
             reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+}
+
+function httpRequest(url, callback){
+    const http = new XMLHttpRequest();
+    http.open("GET", url);
+    http.send();
+
+    http.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            callback.apply(http);
         }
     }
 }

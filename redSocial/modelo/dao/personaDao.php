@@ -73,15 +73,16 @@ class personaDao extends Model{
         }
     }
 
-    public function updateUser($item){    
+    public function updateUser($item){   
          try{
             $query = $this->db->connect()->prepare('UPDATE persona SET usuario = :usuario WHERE correo = :correo
             AND NOT EXISTS (SELECT usuario FROM persona WHERE usuario = :usuario2 )');
              $query->execute([
                  ':usuario' => $item['usuario'],
                  ':correo' => $item['correo'],
-                 ':usuario2' => $item['usuario'],
+                 ':usuario2' => $item['usuario']
              ]);
+             
              $aux =  $query->rowCount(); 
              return substr($aux,0,1);
          }catch(PDOException $e){

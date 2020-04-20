@@ -22,9 +22,9 @@
 </head>
 
 <body>
-    <div id="formato" class="row">
+    <div id="formato" class="row" style="height: 740px;">
         <div class="col-xs-12 col-sm-6" style="text-align: center;" id="imagen">
-            <h3 style="margin-top: 120px; color: #D35400;">MI RED SOCIAL</h3>
+            <h3 style="margin-top: 120px; color: #F39C12;">MI RED SOCIAL</h3>
             <img id="img" src="https://img.icons8.com/color/400/000000/fenix.png">
         </div>
         <div class="col-xs-12 col-sm-6" class="container">
@@ -36,7 +36,7 @@
                 </div>
                 <br>
                 <div style="text-align: right;" id="politicas">
-                    <label for="">Ya Tienes Cuenta <a href="<?php echo constant('URL')?>personaControl"><u>ACCEDE</u></a></label>
+                    <label for="">Ya Tienes Cuenta <a href="<?php echo constant('URL')?>personaControl" style="color: black;">ACCEDE</a></label>
                 </div>
                 <textarea readonly name="" id="" cols="30" rows="10" style="width: 100%; height: 500px;">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio nostrum minima sunt itaque quaerat consequuntur nemo ex perspiciatis repudiandae voluptates magni velit, accusamus quo illo laborum quia debitis iure doloribus?
@@ -46,7 +46,6 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde, velit. Aspernatur, consequatur numquam dignissimos corporis beatae sit! Odio quibusdam sed aliquam vitae veritatis eligendi, quae maxime asperiores libero consequatur adipisci?
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quos obcaecati voluptates accusantium architecto fugiat ad, quaerat ipsam labore rerum suscipit voluptate optio quo dolor cupiditate non nulla hic itaque.
                 </textarea>
-                <br>
                 <br>
                 <div style="text-align: right;">
                    <a type="button" class="regresarT btn btn-dark"  href="<?php echo constant('URL')?>personaControl/render/nuevo" >Regresar</a>
